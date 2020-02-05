@@ -1,6 +1,7 @@
 # Prismagram iOS & Android App
 
-Screens: 
+Screens:
+
 - [ ] Home
 - [ ] Search
 - [ ] Upload
@@ -10,3 +11,4 @@ Screens:
 - [ ] Photo Detail
 - [ ] Photo Comments (Challenge)
 - [ ] Photo Likes (Challenge)
+      -slog
