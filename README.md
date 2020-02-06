@@ -10,5 +10,5 @@ Screens:
 - [ ] Edit Profile (Challenge)
 - [ ] Photo Detail
 - [ ] Photo Comments (Challenge)
-- [ ] Photo Likes (Challenge)
-      -slog
+- [ ] Photo Likes (Challenge) -
+      slog
