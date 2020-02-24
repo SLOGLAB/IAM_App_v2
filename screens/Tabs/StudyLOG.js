@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react"
 import { ScrollView } from "react-native"
-import { gql } from "apollo-boost"
+import gql from "graphql-tag"
 import Loader from "../../components/Loader"
 import { useQuery, useSubscription } from "react-apollo-hooks"
 import Chart from "../../components/Chart"
+import withSuspense from "../../components/Charts/withSuspense"
 
-export const ME = gql`
+const ME = gql`
   {
     me {
       id
@@ -14,15 +15,19 @@ export const ME = gql`
     }
   }
 `
+
+function StudyLOG() {
+  const { loading, data } = useQuery(ME, {
+    suspend: true
+  })
+  return <ScrollView>{loading ? <Loader /> : data && data.me && <Chart {...data.me} />}</ScrollView>
+}
+export default withSuspense(StudyLOG)
+
 // see_existToggle {
 //   id
 //   toggle
 // }
-
-export default ({ navigation }) => {
-  const { loading, data } = useQuery(ME)
-  return <ScrollView>{loading ? <Loader /> : data && data.me && <Chart {...data.me} />}</ScrollView>
-}
 
 //  const { data } = useSubscription(NEW_SECONDS, {
 //   variables: {

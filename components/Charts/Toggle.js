@@ -31,6 +31,11 @@ const PeopleOut = styled.Text`
   height: 100px;
   background-color: red;
 `
+// const SEND_MESSAGE = gql`
+//   mutation update_existToggle($userID: String!, $existToggle: Boolean!) {
+//     update_existToggle(userID: $userID, existToggle: $existToggle)
+//   }
+// `
 
 const MY_TO = gql`
   query see_existToggle {
@@ -41,13 +46,8 @@ const MY_TO = gql`
   }
 `
 const NEW_TO = gql`
-  subscription onnew_existToggle($userID: String!) {
+  subscription new_existToggle($userID: String!) {
     new_existToggle(userID: $userID)
-  }
-`
-const SEND_MESSAGE = gql`
-  mutation update_existToggle($userID: String!, $existToggle: Boolean!) {
-    update_existToggle(userID: $userID, existToggle: $existToggle)
   }
 `
 function Toggle({ userid }) {
@@ -59,27 +59,18 @@ function Toggle({ userid }) {
   const { data } = useSubscription(NEW_TO, {
     variables: { userID: userid }
   })
-
   // const [see_existToggle, setsee_existToggle]=useState(see_existToggle)
-  const toggleMutation = useMutation(SEND_MESSAGE, {
-    variables: {
-      userID: see_existToggle.id,
-      existToggle: see_existToggle.toggle
-    }
-  })
-  ///////
-  const handle = () => {
-    if (data !== undefined) {
-      const { new_existToggle } = data
-      see_existToggle(new_existToggle)
-      toggleMutation()
-    }
-  }
-  //NULL은 구조적 질의 언어 (SQL)에서 데이터베이스 내의 데이터 값이 존재하지
-  //않는다는 것을 지시하는데 사용되는 특별한 표시어이다.
-  console.log(see_existToggle)
+
+  // const handle = () => {
+  //   if (data !== undefined) {
+  //     const { new_existToggle } = data
+  //     see_existToggle(new_existToggle)
+  //     // toggleMutation()
+  //   }
+  // }
   useEffect(() => {
-    handle()
+    // console.log(data)
+    // handle()
   }, [data])
 
   return (
@@ -91,7 +82,9 @@ function Toggle({ userid }) {
 
 export default Toggle
 
-// update_existToggle(
-//   userID: String!
-//   existToggle: Boolean!
-//   ): Boolean!
+// const toggleMutation = useMutation(SEND_MESSAGE, {
+//   variables: {
+//     userID: see_existToggle.id,
+//     existToggle: see_existToggle.toggle
+//   }
+// })

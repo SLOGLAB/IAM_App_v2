@@ -12,10 +12,10 @@ import { ThemeProvider } from "styled-components"
 ///////////////
 import { ApolloProvider } from "react-apollo-hooks"
 
-import { ApolloClient } from "apollo-client"
+import ApolloClient from "apollo-client"
 // import link from "./apollo1"
 
-// import ApolloClient from "apollo-boost"
+// import { ApolloClient } from "apollo-boost"
 // import apolloClientOptions from "./apollo"
 import { HttpLink } from "apollo-link-http"
 import { WebSocketLink } from "apollo-link-ws"
@@ -30,7 +30,7 @@ import { getMainDefinition } from "apollo-utilities"
 
 //////////////////////
 const httpLink = new HttpLink({
-  uri: "http://localhost:4000/graphql"
+  uri: "http://localhost:4000/"
 })
 
 const wsLink = new WebSocketLink({
@@ -41,7 +41,8 @@ const wsLink = new WebSocketLink({
 })
 /////////////////
 export default function App() {
-  //AsyncStorage.clear()
+  // AsyncStorage.clear()
+  // AsyncStorage.getAllKeys().then(AsyncStorage.multiRemove)
   const [loaded, setLoaded] = useState(false)
   const [client, setClient] = useState(null)
   const [isLoggedIn, setIsLoggedIn] = useState(null)
@@ -82,10 +83,10 @@ export default function App() {
               )
             },
 
+            httpLink,
+            wsLink
+            //
             // ...apolloClientOptions
-            // link
-            wsLink,
-            httpLink
           )
         ])
       })
